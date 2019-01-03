@@ -1,0 +1,80 @@
+<style>
+  .body { background: #f0eff5;}
+</style>
+<template>
+  <view class="container">
+    <view hidden= "{{currentTab != 0}}">
+      <message />
+    </view>
+    <view hidden= "{{currentTab != 1}}">
+      <contact />
+    </view>
+    <view hidden = "{{currentTab != 2}}">
+      <discovery />
+    </view>
+    <view hidden = "{{currentTab != 3}}">
+      <me />
+    </view>
+    <view>
+      <tab :active.sync= "currentTab" />
+    </view>
+    <toast />
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import Tab from '../components/tab'
+  import Message from '../components/message'
+  import Toast from 'wepy-com-toast'
+  import Contact from '../components/contact'
+  import Discovery from '../components/discovery'
+  import Me from '../components/me'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'wepy - 微信',
+      navigationBarTextStyle: 'white',
+      navigationBarBackgroundColor: '#3b3a40'
+    }
+    components = {
+      tab: Tab,
+      message: Message,
+      toast: Toast,
+      contact: Contact,
+      discovery: Discovery,
+      me: Me
+    }
+    data = {
+      currentTab: 1 // 当前选择的tab
+    }
+
+    computed = {
+    }
+
+    methods = {
+
+    }
+    showToast(name) {
+      let promise = this.$invoke('toast', 'show', {
+        title: `${name}`
+      })
+      promise.then((d) => {
+        console.log('toast done')
+      })
+    }
+    events = {
+    }
+    onShow() {
+      this.currentTab = 1
+      this.$invoke('message', 'loadMessage')
+    }
+    onLoad() {
+      console.log(this.currentTab)
+    }
+    watch = {
+      currentTab () {
+        console.log(this.currentTab)
+      }
+    }
+  }
+</script>

@@ -1,0 +1,43 @@
+<template>
+  <view class="message">
+    <block wx:for="{{list}}" wx:key="index" wx:for-index="index" wx:for-item="item">
+      <view class="item" @tap="select({{item.id}})">
+        <view class="header">
+          <image class="img" src="{{item.icon}}" />
+        </view>
+        <view class="content">
+          <view class="name">{{item.name}}</view>
+          <view class="lastmsg">{{item.lastmsg}}</view>
+        </view>
+      </view>
+    </block>
+    
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import api from '../common/api'
+export default class Message extends wepy.component {
+  data = {
+    list: [] // 获取消息列表
+  }
+  methods = {
+    select (id, e) { // 选择进入聊天详情
+      this.$root.$navigate({url: 'chat?id=' + id})
+    }
+  }
+  async loadMessage() { // 获取列表
+    this.list = await api.getMessageList()
+    this.$apply()
+  }
+}
+</script>
+<style scoped>
+  .message {background: #ffffff;padding: 0 20rpx;}
+  .item {height: 136rpx;border-bottom: 1rpx solid #dad9d6;box-sizing: border-box;padding: 20rpx;position: relative;}
+  .header {width: 86rpx;height: 96rpx;position: absolute;overflow: hidden;border-radius: 10rpx;background-color: red;}
+  .content {margin-left: 120rpx;}
+  .name { color: #000; font-size: 33rpx; padding: 10rpx 0;}
+  .lastmsg { overflow: hidden; height: 32rpx; color: #7b7b7b; font-size: 26rpx; padding-top: 5rpx;}
+  .img { width: 100rpx; height: 100rpx;}
+</style>

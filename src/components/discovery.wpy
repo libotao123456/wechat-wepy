@@ -1,0 +1,27 @@
+<template>
+  <view class="discovery">
+    <repeat for="{{list}}" key="index" index="index" item="item">
+      <group :list="item" />
+    </repeat>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Group from './group'
+export default class Discovery extends wepy.component {
+  data = {
+    list: {
+      dMoment: [{icon: '../images/moment.png', title: '朋友圈'}, {icon: '../images/moment.png', title: '摇一摇'}],
+      dShopping: [{icon: '../images/shopping.png', title: '购物'}],
+      dDrift: [{icon: '../images/drift.png', title: '漂流瓶'}],
+      dAction: [{icon: '../images/scan.png', title: '扫一扫'}]
+    }
+  }
+  components = {
+    group: Group
+  }
+}
+</script>
+<style scoped>
+
+</style>

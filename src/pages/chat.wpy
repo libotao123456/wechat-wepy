@@ -1,0 +1,30 @@
+<template>
+  <view class="body page_chat">
+    <view>聊天窗口</view>
+    <!-- <chartboard /> -->
+    <myinput />
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Chartboard from '../components/chartboard'
+import Input from '../components/input'
+export default class Chat extends wepy.page {
+  config = {
+    'navigationBarTitleText': 'wepy-微信',
+    'navigationBarTextStyle': 'white',
+    'navigationBarBackgroundColor': '#3b3a40'
+  }
+  data = {}
+  components = {
+    chartboard: Chartboard,
+    myinput: Input
+  }
+}
+</script>
+<style scoped>
+  .page_chat {
+    height: 100%;
+    background-color: #ededed;
+  }
+</style>

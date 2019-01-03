@@ -1,0 +1,23 @@
+<template>
+  <view class="item">
+    <image class="icon" src="{{item.icon}}" />
+    <text class="title">{{item.title}}</text>
+    <image class="arrow_left"  src="../images/arrow_left.png" />
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+export default class Item extends wepy.component {
+  props = {
+    item: {},
+    index: {}
+  }
+  data = {}
+}
+</script>
+<style scoped>
+  .item { height: 100rpx; position: relative; }
+  .icon { width: 60rpx; height: 60rpx; position: absolute; margin-left: 15rpx;}
+  .arrow_left { position: absolute; right: 20rpx; width: 30rpx; height: 40rpx;top: 15rpx;}
+  .title { padding: 18rpx 0 0 100rpx; display: inline-block; font-size: 33rpx;}
+</style>

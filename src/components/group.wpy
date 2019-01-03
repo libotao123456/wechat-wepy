@@ -1,0 +1,31 @@
+<template>
+  <view class="group">
+    <repeat for="{{list}}" key="index" index="index" item="item">
+      <item :item="item" :index="index" />
+    </repeat>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import Item from './item'
+export default class Group extends wepy.component {
+  props = {
+    list: {}
+  }
+  data = {
+  }
+  components = {
+    item: Item
+  }
+  onLoad() {
+    console.log(this.list)
+  }
+}
+</script>
+<style scope>
+  .group {
+    margin-top: 40rpx;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+  }
+</style>
